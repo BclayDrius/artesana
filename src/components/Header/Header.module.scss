@@ -1,0 +1,44 @@
+@use "../../styles/base/variables" as *;
+header{
+    height: $navbar-height;
+    color: $primary-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 0 40px;
+    h1{
+        font-size: 1px;
+        background-image: url("../../assets/logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 170px;
+        height: 90px;
+        color: transparent;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        gap: 30px;
+
+        li{
+            a{
+                text-decoration: none;
+                color: $primary-color;
+                font-weight: bold;
+                transition: color 0.3s;
+                font-size: 1.3em;
+
+                &:hover{
+                    color: black;
+                }
+            }
+        }
+    }
+}
+hr{
+    height: 2px;
+    width: 90%;
+    color: $primary-color;
+    background-color: $primary-color;
+}
