@@ -1,3 +1,5 @@
+import "../../pages/Catalog/Catalog.jsx";
+import { Link } from 'react-router-dom';
 import "./Header.module.scss";
 
 function Header() {
@@ -7,9 +9,9 @@ function Header() {
         <h1>El Hada Artesana</h1>
         <nav>
             <ul>
-            <li><a href="#home">Menú</a></li>
-            <li><a href="#about">Contacto</a></li>
-            <li><a href="#contact">Registrarse</a></li>
+            <li><Link to="./Catalog/">Ver menú</Link></li>
+            <li><Link to="./Login/">Iniciar Sesión</Link></li>
+            <li><Link to="./Register/">Registrarse</Link></li>
             </ul>
         </nav>
         </header>

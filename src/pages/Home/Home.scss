@@ -1,0 +1,18 @@
+@use '../../styles/base' as *;
+
+.hero{
+    height: 75vh;
+    .hero-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        img{
+            width: 500px;
+            height: 500px;
+        }
+        .hero-text {
+            color: $primary-color;
+        }
+    }
+}
