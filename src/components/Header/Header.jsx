@@ -5,17 +5,20 @@ import "./Header.module.scss";
 function Header() {
     return (
         <>
-        <header>
-        <h1>El Hada Artesana</h1>
-        <nav>
-            <ul>
-            <li><Link to="./Catalog/">Ver menú</Link></li>
-            <li><Link to="./Login/">Iniciar Sesión</Link></li>
-            <li><Link to="./Register/">Registrarse</Link></li>
-            </ul>
-        </nav>
-        </header>
-        <hr />
+            <header>
+                <div>
+                    <h1><Link to="/">El Hada Artesana</Link></h1>
+                    <nav>
+                        <ul>
+                            <li><Link to="/Catalog/">Ver menú</Link></li>
+                            <li><Link to="/Login/">Iniciar Sesión</Link></li>
+                            <li><Link to="/Register/">Registrarse</Link></li>
+                        </ul>
+                    </nav>
+                </div>
+                <hr className="header-divider" />
+            </header>
+
         </>
     );
 }
