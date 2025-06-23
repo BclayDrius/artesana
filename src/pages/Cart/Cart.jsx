@@ -10,7 +10,7 @@ function Login() {
       <Header />
       <main>
         <section>
-
+          <p>carrito</p>
         </section>
       </main>
       <Footer />
