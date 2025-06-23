@@ -1,0 +1,12 @@
+:root{
+    --primary-color: #BF0413;
+    --secondary-color: #FFFBE5;
+    --text-color: #000000;
+    --navbar-height: 8rem;
+}
+
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$text-color: var(--text-color);
+$navbar-height: var(--navbar-height);
+$font-family: 'Abhaya Libre', sans-serif;

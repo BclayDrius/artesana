@@ -1,0 +1,35 @@
+@use '../../styles/base' as *;
+
+.hero{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 70%;
+
+        img{
+            width: 500px;
+            height: 500px;
+        }
+
+        .hero-text {
+            color: $primary-color;
+            
+            h2{
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+            a{
+                @include button-style();
+                height: 2.52em;
+                width: 6em;
+            }
+        }
+    }
+}
