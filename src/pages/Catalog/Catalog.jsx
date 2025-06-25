@@ -19,6 +19,7 @@ const products = [
   { name: "Lungo", desc: "Shot de espresso en 90 ml", price: "S/9", img: "../../assets/ProductIcons/lungo.webp" },
   { name: "Americano", desc: "Shot de espresso y agua en 150 ml - 300 ml", price: "S/8 - S/11", img: "../../assets/ProductIcons/americano.webp" },
   { name: "Cortado", desc: "Espresso doble y leche espumada en 90 ml", price: "S/10.50", img: "../../assets/ProductIcons/cortado.webp" },
+  { name: "spungei", desc: "Espresso doble y leche espumada en 90 ml", price: "S/10.50", img: "../../assets/ProductIcons/cortado.webp" },
   // Agrega más productos aquí, cada uno con su propiedad img
 ];
 

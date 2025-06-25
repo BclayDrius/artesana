@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import cofee from "../../assets/cofee.png";  
 
-function Login() {
+function Cart() {
   return (
     <>
       <Header />
@@ -18,4 +18,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Cart;
