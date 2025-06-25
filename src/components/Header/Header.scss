@@ -1,0 +1,75 @@
+@use "../../styles/base/variables" as *;
+
+header {
+    height: $navbar-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    position: fixed;
+    background-color: $secondary-color;
+    top: 0px;
+
+    div {
+        width: 95vw;
+        color: $primary-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px 0 40px;
+
+        h1 {
+            font-size: 1px;
+            background-image: url("../../assets/logo.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 170px;
+            height: 90px;
+            a{
+                display: block;
+                color: transparent;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: $primary-color;
+                    font-weight: bold;
+                    transition: color 0.3s;
+                    font-size: 1.3em;
+
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+            .cart-link{
+                background-image: url(../../assets/shopping-cart-512.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+            }
+
+        }
+    }
+
+    hr {
+        height: 2px;
+        width: 90vw;
+        color: $primary-color;
+        background-color: $primary-color;
+    }
+}

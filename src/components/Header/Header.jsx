@@ -1,6 +1,6 @@
 import "../../pages/Catalog/Catalog.jsx";
 import { Link } from 'react-router-dom';
-import "./Header.module.scss";
+import "./Header.scss";
 
 function Header() {
     return (
@@ -13,6 +13,7 @@ function Header() {
                             <li><Link to="/Catalog/">Ver menú</Link></li>
                             <li><Link to="/Login/">Iniciar Sesión</Link></li>
                             <li><Link to="/Register/">Registrarse</Link></li>
+                            <li><Link to="/Cart/" className="cart-link">Carrito</Link></li>
                         </ul>
                     </nav>
                 </div>
