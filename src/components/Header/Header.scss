@@ -2,74 +2,122 @@
 
 header {
     height: $navbar-height;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     position: fixed;
-    background-color: $secondary-color;
-    top: 0px;
+    top: 0;
+    left: 0;
+    z-index: 1030; // Bootstrap navbar z-index
 
-    div {
-        width: 95vw;
-        color: $primary-color;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 40px 0 40px;
+    .navbar-toggler {
+        color: $primary-color !important;
+        border-color: $primary-color !important;
+        position: relative;
+        z-index: 1100;
 
-        h1 {
-            font-size: 1px;
-            background-image: url("../../assets/logo.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 170px;
-            height: 90px;
-            a{
-                display: block;
-                color: transparent;
-                height: 100%;
-                width: 100%;
-            }
+        &:focus, &:hover {
+            background-color: rgba($primary-color, 0.1);
+            border-color: $primary-color !important;
         }
 
-        ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
+        .navbar-toggler-icon {
+            background: none;
+            width: 1.5em;
+            height: 1.5em;
+            position: relative;
+            display: inline-block;
 
-            li {
-                a {
-                    text-decoration: none;
-                    color: $primary-color;
-                    font-weight: bold;
-                    transition: color 0.3s;
-                    font-size: 1.3em;
-
-                    &:hover {
-                        color: black;
-                    }
-                }
-            }
-            .cart-link{
-                background-image: url(../../assets/shopping-cart-512.png);
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-                width: 30px;
-                height: 30px;
-                display: inline-block;
+            span, &::before, &::after {
+                content: '';
+                display: block;
+                height: 3px;
+                width: 100%;
+                background: $primary-color;
+                margin: 0.3em 0;
+                border-radius: 2px;
+                transition: all 0.3s;
             }
 
+            span {
+                margin: 0.3em 0;
+            }
+
+            &::before {
+                position: absolute;
+                top: 0.2em;
+                left: 0;
+            }
+
+            &::after {
+                position: absolute;
+                bottom: 0.2em;
+                left: 0;
+            }
         }
     }
 
-    hr {
+    .custom-navbar {
+        background-color: $secondary-color !important;
+        padding-top: 0;
+        padding-bottom: 0;
+        min-height: $navbar-height;
+    }
+
+    .custom-navbar-container {
+        width: 95vw;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .custom-logo {
+        font-size: 1px;
+        background-image: url("../../assets/logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 170px;
+        height: 90px;
+        margin-bottom: 0;
+
+        a {
+            display: block;
+            color: transparent;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .navbar-nav {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 0;
+
+        .nav-link {
+            color: $primary-color !important;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: color 0.3s;
+
+            &:hover {
+                color: black !important;
+            }
+        }
+
+        .cart-icon {
+            svg {
+                width: 25px;
+                height: auto;
+            }
+        }
+    }
+
+    .header-divider {
         height: 2px;
         width: 90vw;
         color: $primary-color;
         background-color: $primary-color;
+        margin: 0 auto;
+        border: none;
     }
 }

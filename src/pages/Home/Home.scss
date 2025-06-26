@@ -1,7 +1,7 @@
 @use '../../styles/base' as *;
 
 .hero{
-    height: 80vh;
+    height: 83vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,21 +14,27 @@
         width: 70%;
 
         img{
-            width: 500px;
+            width: auto;
             height: 500px;
+            padding: 0 5rem 0 0;
         }
 
         .hero-text {
             color: $primary-color;
             
-            h2{
+            h1{
                 font-size: 3rem;
                 margin-bottom: 1rem;
             }
             a{
                 @include button-style();
                 height: 2.52em;
-                width: 6em;
+                width: 8em;
+                svg{
+                    width: 1em;
+                    height: 1em;
+                    margin-right: 0.5rem;
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ import Catalog from "./pages/Catalog/Catalog.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import Cart from "./pages/Cart/Cart.jsx";
+import "./styles/style.scss";
 
 function App() {
   return (
