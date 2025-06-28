@@ -218,3 +218,47 @@
     padding: 7px 16px;
   }
 }
+.cart-qty-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  button {
+    width: 32px;
+    height: 32px;
+    border: 2px solid $primary-color;
+    border-radius: 8px;
+    background: transparent;
+    color: $primary-color;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+
+    &:hover {
+      background: $primary-color;
+      color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: transparent;
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  span {
+    min-width: 24px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $primary-color;
+  }
+}
