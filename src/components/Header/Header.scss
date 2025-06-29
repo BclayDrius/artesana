@@ -6,7 +6,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1030; // Bootstrap navbar z-index
+    z-index: 9999; // Bootstrap navbar z-index
 
     .navbar-toggler {
         color: $primary-color !important;
@@ -14,7 +14,8 @@ header {
         position: relative;
         z-index: 1100;
 
-        &:focus, &:hover {
+        &:focus,
+        &:hover {
             background-color: rgba($primary-color, 0.1);
             border-color: $primary-color !important;
         }
@@ -26,7 +27,9 @@ header {
             position: relative;
             display: inline-block;
 
-            span, &::before, &::after {
+            span,
+            &::before,
+            &::after {
                 content: '';
                 display: block;
                 height: 3px;
