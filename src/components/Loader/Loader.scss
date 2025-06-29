@@ -1,0 +1,49 @@
+@use "../../styles/base/variables" as *;
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: $secondary-color;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-logo {
+  width: 120px;
+  height: 120px;
+  animation: logo-pulse 1.5s infinite cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes overlay{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@keyframes logo-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.4);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+

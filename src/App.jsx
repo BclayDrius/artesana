@@ -1,23 +1,45 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home.jsx";
-import Catalog from "./pages/Catalog/Catalog.jsx";
-import Login from "./pages/Login/Login.jsx";
-import Register from "./pages/Register/Register.jsx";
-import Cart from "./pages/Cart/Cart.jsx";
-import Admin from './pages/Admin/Admin.jsx';
+import { Routes, Route, useLocation } from "react-router-dom";
+import { Suspense, lazy, useEffect, useState } from "react";
+import Loader from "./components/Loader/Loader.jsx";
 import "./styles/style.scss";
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Catalog" element={<Catalog />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/Register" element={<Register />} />
-      <Route path="/Cart" element={<Cart />} />
-      <Route path="/Admin" element={<Admin />} />
+const Home = lazy(() => import("./pages/Home/Home.jsx"));
+const Catalog = lazy(() => import("./pages/Catalog/Catalog.jsx"));
+const Login = lazy(() => import("./pages/Login/Login.jsx"));
+const Register = lazy(() => import("./pages/Register/Register.jsx"));
+const Cart = lazy(() => import("./pages/Cart/Cart.jsx"));
+const Admin = lazy(() => import("./pages/Admin/Admin.jsx"));
 
-    </Routes>
+function App() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setFadeOut(false);
+    const timeout = setTimeout(() => setFadeOut(true), 1000); // 1s de carga
+    const removeTimeout = setTimeout(() => setLoading(false), 1500); // 1s carga + 0.5s fade
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(removeTimeout);
+    };
+  }, [location.pathname]);
+
+  return (
+    <>
+      {loading && <Loader fadeOut={fadeOut} />}
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Catalog" element={<Catalog />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/Admin" element={<Admin />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 
