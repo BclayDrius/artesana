@@ -63,13 +63,10 @@ function Admin() {
       <main className="admin-main">
         <div className="admin-content">
           <h1>Panel de Administración</h1>
-          
+
           <div className="admin-actions">
-            <button 
-              className="admin-button"
-              onClick={toggleForm}
-            >
-              {showForm ? 'Cancelar' : 'Agregar Producto'}
+            <button className="admin-button" onClick={toggleForm}>
+              {showForm ? "Cancelar" : "Agregar Producto"}
             </button>
           </div>
 
@@ -145,14 +142,16 @@ function Admin() {
               {productos.map((producto) => (
                 <div key={producto.id} className="product-card">
                   <div className="product-image">
-                    {producto.imagen && <img src={producto.imagen} alt={producto.nombre} />}
+                    {producto.imagen && (
+                      <img src={producto.imagen} alt={producto.nombre} />
+                    )}
                   </div>
                   <div className="product-info">
                     <h3>{producto.nombre}</h3>
                     <p className="price">${producto.precio}</p>
                     <p className="category">{producto.categoria}</p>
                     <p className="description">{producto.descripcion}</p>
-                    <button 
+                    <button
                       className="delete-button"
                       onClick={() => eliminarProducto(producto.id)}
                     >
@@ -169,6 +168,5 @@ function Admin() {
     </div>
   );
 }
-
 
 export default Admin;
