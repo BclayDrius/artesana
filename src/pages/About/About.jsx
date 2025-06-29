@@ -89,6 +89,37 @@ const About = () => {
               </div>
             </div>
           </section>
+
+          <section className="pickup-section">
+            <div className="pickup-content">
+              <h2 className="fade-in">Puntos de Recojo</h2>
+              <div className="pickup-info">
+                <div className="pickup-description fade-in delay-1">
+                  <h3>¿Dónde encontrarnos?</h3>
+                  <p>
+                    Nuestro punto de recojo principal está ubicado en San Bartolo, un lugar lleno de historia y cultura. 
+                    El entorno es perfecto para disfrutar de un agradable paseo mientras esperas tu pedido. 
+                    Cerca puedes encontrar hermosas vistas al mar y una gran variedad de restaurantes tradicionales.
+                  </p>
+                  <p>
+                    Nuestro horario de recojo es de lunes a sábado, de 9:00 a.m. a 6:00 p.m. 
+                    Siempre puedes contactarnos para coordinar tu recojo con antelación.
+                  </p>
+                </div>
+                <div className="pickup-map fade-in delay-2">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.014387381252!2d-76.7771872!3d-12.3921792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91059f242ac3350d%3A0x8534c4f7151dfa55!2sEl%20Hada%20Artesana%20-%20San%20Bartolo!5e0!3m2!1ses!2spe!4v1746289321683!5m2!1ses!2spe"
+                    width="600"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
       <Footer />

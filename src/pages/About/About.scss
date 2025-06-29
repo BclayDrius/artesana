@@ -127,34 +127,100 @@
 /* Team Section */
 .team-section {
     padding: 4rem 0;
-    
+    background-color: $secondary-color;
+
     h2 {
         text-align: center;
         margin-bottom: 3rem;
+        color: $primary-color;
+        font-size: 2.5rem;
     }
-    
+
     .team-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
-        
+        max-width: 1200px;
+        margin: 0 auto;
+
         .team-member {
-            text-align: center;
+            background: white;
             padding: 2rem;
-            background-color: $secondary-color;
             border-radius: 10px;
-            
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
             .member-image {
                 width: 150px;
                 height: 150px;
+                margin: 0 auto;
                 border-radius: 50%;
-                background-color: $primary-color;
-                margin: 0 auto 1rem;
+                background: $primary-color;
             }
-            
+
             h3 {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
+                margin: 1.5rem 0;
+                color: $primary-color;
+            }
+
+            p {
+                color: $text-color;
+            }
+        }
+    }
+}
+
+.pickup-section {
+    padding: 4rem 0;
+    background-color: white;
+
+    .pickup-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: $primary-color;
+        font-size: 2.5rem;
+    }
+
+    .pickup-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+
+        .pickup-description {
+            h3 {
+                color: $primary-color;
+                margin-bottom: 1.5rem;
+            }
+
+            p {
+                color: $text-color;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .pickup-map {
+            iframe {
+                width: 100%;
+                height: 400px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
         }
     }

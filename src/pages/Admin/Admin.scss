@@ -6,9 +6,6 @@
     background-color: $secondary-color;
 }
 
-.admin-main {
-}
-
 .admin-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -17,12 +14,12 @@
 
 .admin-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 2rem;
-    
-    @include button-style();
+
     
     .admin-button {
+        @include button-style();
         padding: 0.8rem 1.5rem;
         font-size: 1.2rem;
         border-radius: 8px;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 function Cart() {
@@ -13,15 +14,23 @@ function Cart() {
   const carritoId = localStorage.getItem("carritoId");
 
   const fetchCarrito = () => {
-    if (!token || !carritoId) return;
+    if (!token || !carritoId) {
+      setLoading(false);
+      return;
+    }
 
     setLoading(true);
     axios.get(`http://localhost:8000/api/ordenes/carritos/${carritoId}/`, {
       headers: { Authorization: `Token ${token}` },
     })
-      .then((res) => setCarrito(res.data))
-      .catch((err) => console.error("Error al cargar el carrito:", err))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        setCarrito(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error al cargar el carrito:", err);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
