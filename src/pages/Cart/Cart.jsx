@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 
 function Cart() {
   const [carrito, setCarrito] = useState(null);

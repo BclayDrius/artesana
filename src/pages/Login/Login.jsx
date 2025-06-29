@@ -64,7 +64,7 @@ function Login() {
               <label htmlFor="password">Contraseña:</label>
               <input type="password" id="password" name="password" required onChange={handleChange} />
 
-              <button type="submit">Iniciar Sesión</button>
+              <button type="submit" className="login-register-a">Iniciar Sesión</button>
             </form>
             {message && <p>{message}</p>}
           </div>

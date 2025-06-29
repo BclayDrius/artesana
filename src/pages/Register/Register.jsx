@@ -71,11 +71,11 @@ function Register() {
               <label htmlFor="password">Contraseña:</label>
               <input type="password" id="password" name="password" required onChange={handleChange} />
 
-              <button type="submit">Registrarse</button>
+              <button type="submit" className="login-register-a">Registrarse</button>
             </form>
 
             {message && <p>{message}</p>}
-            <p>¿Ya tienes una cuenta? <Link to="/Login">Inicia sesión</Link></p>
+            <p>¿Ya tienes una cuenta? <Link to="/Login" className="login-register-a">Inicia sesión</Link></p>
           </div>
 
           <div className="register-image-container">
