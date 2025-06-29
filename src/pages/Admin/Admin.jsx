@@ -23,6 +23,7 @@ function Admin() {
     imagen: "",
     categoria: categorias[0],
   });
+  const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,10 +40,15 @@ function Admin() {
       imagen: "",
       categoria: categorias[0],
     });
+    setShowForm(false);
   };
 
   const eliminarProducto = (id) => {
     setProductos((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
   };
 
   const editarProducto = (id, campo, valor) => {
@@ -52,110 +58,117 @@ function Admin() {
   };
 
   return (
-    <>
+    <div className="admin-container">
       <Header />
       <main className="admin-main">
+        <div className="admin-content">
+          <h1>Panel de Administración</h1>
+          
+          <div className="admin-actions">
+            <button 
+              className="admin-button"
+              onClick={toggleForm}
+            >
+              {showForm ? 'Cancelar' : 'Agregar Producto'}
+            </button>
+          </div>
 
-        <h1>Panel de Administración</h1>
-
-        <section className="add-product">
-          <h2>Agregar producto</h2>
-          <input
-            type="text"
-            placeholder="Nombre"
-            name="nombre"
-            value={nuevoProducto.nombre}
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            placeholder="Precio"
-            name="precio"
-            value={nuevoProducto.precio}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Descripción"
-            name="descripcion"
-            value={nuevoProducto.descripcion}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="URL de la imagen"
-            name="imagen"
-            value={nuevoProducto.imagen}
-            onChange={handleChange}
-          />
-          <select
-            name="categoria"
-            value={nuevoProducto.categoria}
-            onChange={handleChange}
-          >
-            {categorias.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-          <button onClick={agregarProducto}>Agregar</button>
-        </section>
-
-        <section className="admin-listado">
-          <h2>Productos</h2>
-          {productos.length === 0 && <p>No hay productos aún.</p>}
-
-          {productos.map((producto) => (
-            <div className="producto" key={producto.id}>
-              <input
-                type="text"
-                value={producto.nombre}
-                onChange={(e) =>
-                  editarProducto(producto.id, "nombre", e.target.value)
-                }
-              />
-              <input
-                type="number"
-                value={producto.precio}
-                onChange={(e) =>
-                  editarProducto(producto.id, "precio", e.target.value)
-                }
-              />
-              <input
-                type="text"
-                value={producto.descripcion}
-                onChange={(e) =>
-                  editarProducto(producto.id, "descripcion", e.target.value)
-                }
-              />
-              <input
-                type="text"
-                value={producto.imagen}
-                onChange={(e) =>
-                  editarProducto(producto.id, "imagen", e.target.value)
-                }
-              />
-              <select
-                value={producto.categoria}
-                onChange={(e) =>
-                  editarProducto(producto.id, "categoria", e.target.value)
-                }
-              >
-                {categorias.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-              <button onClick={() => eliminarProducto(producto.id)}>🗑️</button>
+          {showForm && (
+            <div className="product-form">
+              <h2>Agregar Nuevo Producto</h2>
+              <div className="form-group">
+                <label htmlFor="nombre">Nombre:</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={nuevoProducto.nombre}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="precio">Precio:</label>
+                <input
+                  type="number"
+                  id="precio"
+                  name="precio"
+                  value={nuevoProducto.precio}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="descripcion">Descripción:</label>
+                <textarea
+                  id="descripcion"
+                  name="descripcion"
+                  value={nuevoProducto.descripcion}
+                  onChange={handleChange}
+                  rows="3"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="imagen">Imagen URL:</label>
+                <input
+                  type="url"
+                  id="imagen"
+                  name="imagen"
+                  value={nuevoProducto.imagen}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="categoria">Categoría:</label>
+                <select
+                  id="categoria"
+                  name="categoria"
+                  value={nuevoProducto.categoria}
+                  onChange={handleChange}
+                >
+                  {categorias.map((categoria, index) => (
+                    <option key={index} value={categoria}>
+                      {categoria}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button className="submit-button" onClick={agregarProducto}>
+                Agregar Producto
+              </button>
             </div>
-          ))}
-        </section>
+          )}
+
+          <div className="products-list">
+            <h2>Productos</h2>
+            <div className="products-grid">
+              {productos.map((producto) => (
+                <div key={producto.id} className="product-card">
+                  <div className="product-image">
+                    {producto.imagen && <img src={producto.imagen} alt={producto.nombre} />}
+                  </div>
+                  <div className="product-info">
+                    <h3>{producto.nombre}</h3>
+                    <p className="price">${producto.precio}</p>
+                    <p className="category">{producto.categoria}</p>
+                    <p className="description">{producto.descripcion}</p>
+                    <button 
+                      className="delete-button"
+                      onClick={() => eliminarProducto(producto.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
+
 
 export default Admin;

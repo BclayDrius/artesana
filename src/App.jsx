@@ -9,6 +9,7 @@ const Login = lazy(() => import("./pages/Login/Login.jsx"));
 const Register = lazy(() => import("./pages/Register/Register.jsx"));
 const Cart = lazy(() => import("./pages/Cart/Cart.jsx"));
 const Admin = lazy(() => import("./pages/Admin/Admin.jsx"));
+const About = lazy(() => import("./pages/About/About.jsx"));
 
 function App() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Admin" element={<Admin />} />
+          <Route path="/About" element={<About />} />
         </Routes>
       </Suspense>
     </>
