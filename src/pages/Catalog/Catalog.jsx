@@ -1,5 +1,6 @@
 import "./Catalog.scss";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
@@ -20,22 +21,96 @@ function Catalog() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartId, setCartId] = useState(null);
 
-  // Simulación de fetch
+  // Obtener el carrito actual (o crearlo si no existe)
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setProducts([
-        // ...pon aquí tus productos de prueba...
-      ]);
-      setLoading(false);
-    }, 800);
+    const fetchCart = async () => {
+      try {
+        const res = await axios.get(
+          "http://127.0.0.1:8000/api/ordenes/carritos/mi-carrito/",
+          {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setCartId(res.data.id);
+        console.log("🛒 Carrito cargado con ID:", res.data.id);
+      } catch (err) {
+        console.error("❌ Error al obtener el carrito:", err.response?.data || err.message);
+      }
+    };
+    fetchCart();
+  }, []);
+
+  // Obtener productos por categoría
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        let url = "http://127.0.0.1:8000/api/catalogo/productos/";
+        if (selectedCategory) {
+          url += `?categoria=${encodeURIComponent(selectedCategory)}`;
+        }
+        const response = await axios.get(url);
+        setProducts(response.data);
+      } catch (error) {
+        console.error("❌ Error al cargar productos:", error.response?.data || error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
   }, [selectedCategory]);
 
   const handleCategoryClick = (categoria) => {
     setSelectedCategory(categoria);
-    // fetchProducts(categoria); // Si tienes fetch real, descomenta esto
-    setMenuOpen(false); // Cierra el menú al seleccionar
+    setMenuOpen(false);
+  };
+
+  const updateQuantity = (productId, delta) => {
+    setQuantities((prev) => {
+      const current = prev[productId] || 0;
+      const updated = Math.max(0, Math.min(25, current + delta));
+      return { ...prev, [productId]: updated };
+    });
+  };
+
+  const handleAddToCart = async (productId) => {
+    const quantity = quantities[productId] || 0;
+    if (quantity > 0 && cartId) {
+      try {
+        const url = `http://127.0.0.1:8000/api/ordenes/carritos/${cartId}/agregar_item/`;
+        const res = await axios.post(
+          url,
+          {
+            producto: productId,
+            cantidad: quantity,
+          },
+          {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        console.log("✅ Producto agregado al carrito:", res.data);
+
+        // Mostrar notificación
+        alert("Producto agregado al carrito");
+
+        // Reset cantidad
+        setQuantities((prev) => ({
+          ...prev,
+          [productId]: 0,
+        }));
+      } catch (error) {
+        console.error("❌ Error al agregar al carrito:", error.response?.data || error.message);
+        alert("Error al agregar al carrito");
+      }
+    } else {
+      console.warn("⚠️ Cantidad inválida o carrito no cargado");
+    }
   };
 
   return (
@@ -73,7 +148,7 @@ function Catalog() {
           </ul>
         </nav>
 
-        {/* Overlay para cerrar el menú tocando fuera */}
+        {/* Overlay móvil */}
         {menuOpen && (
           <div
             className="catalog-menu-overlay"
@@ -82,20 +157,45 @@ function Catalog() {
           />
         )}
 
+        {/* Productos */}
         {loading ? (
           <p style={{ padding: "1rem" }}>Cargando productos...</p>
+        ) : products.length === 0 ? (
+          <p style={{ padding: "1rem" }}>No hay productos disponibles.</p>
         ) : (
           <section className="catalog-grid">
             {products.map((prod) => (
               <div className="catalog-item" key={prod.id}>
-                {/* ...tu contenido de producto aquí... */}
-                <div className="catalog-img-placeholder" />
+                {prod.imagen ? (
+                  <img
+                    src={prod.imagen}
+                    alt={prod.nombre}
+                    className="catalog-img"
+                  />
+                ) : (
+                  <div className="catalog-img-placeholder" />
+                )}
                 <div className="catalog-info">
                   <h3>
                     {prod.nombre}
-                    <span className="catalog-price">{prod.precio}</span>
+                    <span className="catalog-price">S/ {prod.precio}</span>
                   </h3>
-                  <p>{prod.desc}</p>
+                  <p>{prod.descripcion}</p>
+                </div>
+
+                {/* Controles de cantidad */}
+                <div className="catalog-controls">
+                  <div className="catalog-quantity">
+                    <button onClick={() => updateQuantity(prod.id, -1)}>-</button>
+                    <span>{quantities[prod.id] || 0}</span>
+                    <button onClick={() => updateQuantity(prod.id, 1)}>+</button>
+                  </div>
+                  <button
+                    className="catalog-add-button"
+                    onClick={() => handleAddToCart(prod.id)}
+                  >
+                    Agregar
+                  </button>
                 </div>
               </div>
             ))}

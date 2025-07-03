@@ -5,26 +5,24 @@ import Footer from "../../components/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 function Cart() {
   const [carrito, setCarrito] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const token = localStorage.getItem("token");
-  const carritoId = localStorage.getItem("carritoId");
 
   const fetchCarrito = () => {
-    if (!token || !carritoId) {
+    if (!token) {
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    axios.get(`http://localhost:8000/api/ordenes/carritos/${carritoId}/`, {
+    axios.get(`http://localhost:8000/api/ordenes/carritos/mi-carrito/`, {
       headers: { Authorization: `Token ${token}` },
     })
       .then((res) => {
         setCarrito(res.data);
+        localStorage.setItem("carritoId", res.data.id); // ✅ Guardamos el ID para futuras acciones
         setLoading(false);
       })
       .catch((err) => {
@@ -35,10 +33,11 @@ function Cart() {
 
   useEffect(() => {
     fetchCarrito();
-  }, [token, carritoId]);
+  }, [token]);
 
   const updateCantidad = (productoId, nuevaCantidad) => {
-    if (nuevaCantidad < 1 || !Number.isInteger(nuevaCantidad)) return;
+    const carritoId = carrito?.id;
+    if (!carritoId || nuevaCantidad < 1 || !Number.isInteger(nuevaCantidad)) return;
 
     axios.post(
       `http://localhost:8000/api/ordenes/carritos/${carritoId}/agregar_item/`,
@@ -67,6 +66,9 @@ function Cart() {
   };
 
   const handleRemoveItem = (productoId) => {
+    const carritoId = carrito?.id;
+    if (!carritoId) return;
+
     axios.post(
       `http://localhost:8000/api/ordenes/carritos/${carritoId}/eliminar_item/`,
       { producto: productoId },
@@ -87,6 +89,7 @@ function Cart() {
   };
 
   if (loading) return <p>Cargando carrito...</p>;
+
   if (!carrito || !carrito.items.length) {
     return (
       <>
@@ -169,7 +172,9 @@ function Cart() {
           <div className="cart-total-box">
             <div className="cart-total-label">Total:</div>
             <div className="cart-total-value">S/{total.toFixed(2)}</div>
-            <button type="button" className="cart-order-btn">Realizar pedido</button>
+            <button type="button" className="cart-order-btn">
+              Realizar pedido
+            </button>
           </div>
         </div>
       </main>

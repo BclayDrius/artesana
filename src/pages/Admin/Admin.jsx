@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Admin.scss";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
@@ -20,41 +20,102 @@ function Admin() {
     nombre: "",
     precio: "",
     descripcion: "",
-    imagen: "",
+    imagen: null,
     categoria: categorias[0],
   });
   const [showForm, setShowForm] = useState(false);
+
+  // Cargar productos al iniciar
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/catalogo/productos/");
+        if (response.ok) {
+          const data = await response.json();
+          setProductos(data);
+        }
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNuevoProducto((prev) => ({ ...prev, [name]: value }));
   };
 
-  const agregarProducto = () => {
-    if (!nuevoProducto.nombre || !nuevoProducto.precio) return;
-    setProductos((prev) => [...prev, { ...nuevoProducto, id: Date.now() }]);
-    setNuevoProducto({
-      nombre: "",
-      precio: "",
-      descripcion: "",
-      imagen: "",
-      categoria: categorias[0],
-    });
-    setShowForm(false);
+  const handleFileChange = (e) => {
+    setNuevoProducto((prev) => ({ ...prev, imagen: e.target.files[0] }));
   };
 
-  const eliminarProducto = (id) => {
-    setProductos((prev) => prev.filter((p) => p.id !== id));
+  const agregarProducto = async () => {
+    if (!nuevoProducto.nombre || !nuevoProducto.precio) return;
+
+    const formData = new FormData();
+    formData.append("nombre", nuevoProducto.nombre);
+    formData.append("precio", nuevoProducto.precio);
+    formData.append("descripcion", nuevoProducto.descripcion);
+    formData.append("categoria", nuevoProducto.categoria);
+    if (nuevoProducto.imagen) {
+      formData.append("imagen", nuevoProducto.imagen);
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:8000/api/catalogo/productos/", {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setProductos((prev) => [...prev, data]);
+        setNuevoProducto({
+          nombre: "",
+          precio: "",
+          descripcion: "",
+          imagen: null,
+          categoria: categorias[0],
+        });
+        setShowForm(false);
+      } else {
+        const err = await response.json();
+        console.error("❌ Error al crear producto:", err);
+      }
+    } catch (error) {
+      console.error("🚨 Error de red:", error);
+    }
+  };
+
+  const eliminarProducto = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/catalogo/productos/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        setProductos((prev) => prev.filter((p) => p.id !== id));
+      } else {
+        console.error("❌ Error al eliminar producto");
+      }
+    } catch (error) {
+      console.error("🚨 Error de red al eliminar:", error);
+    }
   };
 
   const toggleForm = () => {
     setShowForm(!showForm);
-  };
-
-  const editarProducto = (id, campo, valor) => {
-    setProductos((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, [campo]: valor } : p))
-    );
   };
 
   return (
@@ -73,6 +134,7 @@ function Admin() {
           {showForm && (
             <div className="product-form">
               <h2>Agregar Nuevo Producto</h2>
+
               <div className="form-group">
                 <label htmlFor="nombre">Nombre:</label>
                 <input
@@ -84,6 +146,7 @@ function Admin() {
                   required
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="precio">Precio:</label>
                 <input
@@ -95,6 +158,7 @@ function Admin() {
                   required
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="descripcion">Descripción:</label>
                 <textarea
@@ -105,16 +169,18 @@ function Admin() {
                   rows="3"
                 />
               </div>
+
               <div className="form-group">
-                <label htmlFor="imagen">Imagen URL:</label>
+                <label htmlFor="imagen">Imagen:</label>
                 <input
-                  type="url"
+                  type="file"
                   id="imagen"
                   name="imagen"
-                  value={nuevoProducto.imagen}
-                  onChange={handleChange}
+                  accept="image/*"
+                  onChange={handleFileChange}
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="categoria">Categoría:</label>
                 <select
@@ -130,6 +196,7 @@ function Admin() {
                   ))}
                 </select>
               </div>
+
               <button className="submit-button" onClick={agregarProducto}>
                 Agregar Producto
               </button>
@@ -170,3 +237,4 @@ function Admin() {
 }
 
 export default Admin;
+

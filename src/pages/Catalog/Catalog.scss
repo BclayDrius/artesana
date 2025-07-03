@@ -79,10 +79,11 @@
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
   flex: 1;
   transition: margin 0.35s;
+  align-items: stretch;
 }
 
 .catalog-item {
@@ -93,19 +94,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 320px;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
-.catalog-img-placeholder {
+.catalog-img-placeholder,
+.catalog-img {
   width: 140px;
   height: 140px;
   border: 2px solid #c0392b;
   border-radius: 50%;
   background: #eee;
   margin-bottom: 1rem;
+  object-fit: cover;
 }
 
 .catalog-info {
   text-align: center;
+  flex-grow: 1;
 
   h3 {
     font-size: 1.1rem;
@@ -122,13 +129,18 @@
   p {
     font-size: 0.95rem;
     color: #444;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* máximo 3 líneas */
+    -webkit-box-orient: vertical;
   }
 }
 
 // Responsive
 @media (max-width: 1200px) {
   .catalog-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
@@ -174,21 +186,86 @@
   }
 
   .catalog-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-left: 0;
-    transition: margin 0.35s;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .catalog-item {
+    max-width: none;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .catalog-main {
     flex-direction: column;
   }
 
-
   .catalog-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .catalog-item {
+    width: 100%;
+  }
+}
+
+.catalog-controls {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  gap: 1rem;
+}
+
+.catalog-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  button {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
+  span {
+    min-width: 28px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #fff;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+}
+
+.catalog-add-button {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken(#c0392b, 10%);
   }
 }

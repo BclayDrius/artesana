@@ -71,7 +71,7 @@ function Header() {
 
               <li className="nav-item">
                 <Link className="nav-link" to="/Catalog/">
-                  Ver menú
+                  Para llevar
                 </Link>
               </li>
 
@@ -87,14 +87,16 @@ function Header() {
                       Registrarse
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/Admin/">
-                      Administrar
-                    </Link>
-                  </li>
                 </>
               ) : (
                 <>
+                  {user.is_superuser && (
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/Admin/">
+                        Administrar
+                      </Link>
+                    </li>
+                  )}
                   <li className="nav-item cart-icon">
                     <Link className="nav-link" to="/Cart/">
                       <svg
@@ -109,7 +111,6 @@ function Header() {
                       </svg>
                     </Link>
                   </li>
-
                   <li className="nav-item">
                     <button
                       onClick={handleLogout}
