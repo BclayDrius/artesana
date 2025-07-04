@@ -116,7 +116,7 @@ function Home() {
                 EL HADA ARTESANA!
               </h1>
               <div className="hero-links">
-                <Link to="../Catalog/">
+                <Link to="../Menu/">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
