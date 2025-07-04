@@ -1,4 +1,5 @@
 @use '../../styles/base' as *;
+@use 'sass:color';
 
 .catalog-main {
   display: flex;
@@ -25,7 +26,7 @@
   transition: background 0.2s;
 
   &:hover {
-    background: darken(#c0392b, 10%);
+    background: color.adjust(#c0392b, $lightness: -10%);
   }
 }
 
@@ -132,7 +133,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* máximo 3 líneas */
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    /* máximo 3 líneas */
     -webkit-box-orient: vertical;
   }
 }
@@ -266,6 +269,6 @@
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: darken(#c0392b, 10%);
+    background-color: color.adjust(#c0392b, $lightness: -10%);
   }
 }
