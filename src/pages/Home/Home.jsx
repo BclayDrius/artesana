@@ -11,28 +11,28 @@ import { useRef, useState, useEffect } from "react";
 
 const destacados = [
   {
-    nombre: "Espresso",
+    nombre: "Grano café del Hada ",
     img: cofee,
-    desc: "Shot intenso de café",
-    precio: "S/9",
+    desc: "250gr",
+    precio: "S/32",
   },
   {
-    nombre: "Cappuccino",
+    nombre: "Café del Hada molido fino ",
     img: cofee,
-    desc: "Espuma y arte latte",
-    precio: "S/12",
+    desc: "250gr",
+    precio: "S/32",
   },
   {
-    nombre: "Croissant",
+    nombre: "Café del Hada molido medio ",
     img: cofee,
-    desc: "Pan artesanal recién horneado",
-    precio: "S/7",
+    desc: "250gr",
+    precio: "S/32",
   },
   {
-    nombre: "Wrap Veggie",
+    nombre: "Café del Hada molido grueso ",
     img: cofee,
-    desc: "Fresco y saludable",
-    precio: "S/14",
+    desc: "250gr",
+    precio: "S/32",
   },
 ];
 
