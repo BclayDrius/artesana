@@ -14,6 +14,8 @@
 .canva-embed {
   width: 900px;
   height: 1273px;
+  max-width: 100vw;
+  max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +24,34 @@
 .canva-embed-wrapper {
   width: 900px;
   height: 1273px;
+  max-width: 100vw;
+  max-height: 100vh;
   border: none;
   background: none;
   display: block;
+}
+
+// Responsive: escala el menú manteniendo proporción
+@media (max-width: 950px),
+(max-height: 1300px) {
+
+  .canva-embed,
+  .canva-embed-wrapper {
+    width: 100vw;
+    height: calc(100vw * 1273 / 900);
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+
+  // Si la altura es el limitante, ajusta por altura
+  @media (max-height: 1273px) and (min-aspect-ratio: 900/1273) {
+
+    .canva-embed,
+    .canva-embed-wrapper {
+      height: 100vh;
+      width: calc(100vh * 900 / 1273);
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+  }
 }
