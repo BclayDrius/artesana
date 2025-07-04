@@ -4,16 +4,7 @@ import axios from "axios";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
-const categories = [
-  "Café",
-  "Endulzantes",
-  "Salados",
-  "Bebidas",
-  "Pan o Wrap",
-  "Hamburguesas",
-  "Al Plato",
-  "Desayunos",
-];
+const categories = ["Cafés", "Panes", "Quesos", "Helados"];
 
 function Catalog() {
   const [products, setProducts] = useState([]);
@@ -38,7 +29,10 @@ function Catalog() {
         setCartId(res.data.id);
         console.log("🛒 Carrito cargado con ID:", res.data.id);
       } catch (err) {
-        console.error("❌ Error al obtener el carrito:", err.response?.data || err.message);
+        console.error(
+          "❌ Error al obtener el carrito:",
+          err.response?.data || err.message
+        );
       }
     };
     fetchCart();
@@ -56,7 +50,10 @@ function Catalog() {
         const response = await axios.get(url);
         setProducts(response.data);
       } catch (error) {
-        console.error("❌ Error al cargar productos:", error.response?.data || error.message);
+        console.error(
+          "❌ Error al cargar productos:",
+          error.response?.data || error.message
+        );
       } finally {
         setLoading(false);
       }
@@ -105,7 +102,10 @@ function Catalog() {
           [productId]: 0,
         }));
       } catch (error) {
-        console.error("❌ Error al agregar al carrito:", error.response?.data || error.message);
+        console.error(
+          "❌ Error al agregar al carrito:",
+          error.response?.data || error.message
+        );
         alert("Error al agregar al carrito");
       }
     } else {
@@ -186,9 +186,13 @@ function Catalog() {
                 {/* Controles de cantidad */}
                 <div className="catalog-controls">
                   <div className="catalog-quantity">
-                    <button onClick={() => updateQuantity(prod.id, -1)}>-</button>
+                    <button onClick={() => updateQuantity(prod.id, -1)}>
+                      -
+                    </button>
                     <span>{quantities[prod.id] || 0}</span>
-                    <button onClick={() => updateQuantity(prod.id, 1)}>+</button>
+                    <button onClick={() => updateQuantity(prod.id, 1)}>
+                      +
+                    </button>
                   </div>
                   <button
                     className="catalog-add-button"

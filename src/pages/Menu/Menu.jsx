@@ -7,20 +7,25 @@ import Footer from "../../components/Footer/Footer.jsx";
 function Menu() {
   return (
     <>
-      <Header />
-      <main className="menu-container">
-        <div className="canva-embed">
-          <iframe
-            src="https://www.canva.com/design/DAGDFKVi7k4/embed"
-            allow="fullscreen"
-            allowFullScreen="true"
-            title="Menu Design"
-            width="100%"
-            height="100%"
-          ></iframe>
-        </div>
-      </main>
-      <Footer />
+      <>
+        <Header />
+        <main className="menu-container">
+          <div className="canva-embed">
+            <iframe
+              className="canva-embed-wrapper"
+              loading="lazy"
+              src="https://www.canva.com/design/DAGsK8VW_-A/TggSb_DkVBJBHMMeteQoNg/view?embed"
+              allowFullScreen
+              allow="fullscreen"
+              width="900"
+              height="1273"
+              style={{ border: "none", background: "none" }}
+              title="Menú"
+            ></iframe>
+          </div>
+        </main>
+        <Footer />
+      </>
     </>
   );
 }
