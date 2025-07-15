@@ -1,12 +1,12 @@
 @use '../../styles/base' as *;
 
-.register-section{
+.register-section {
     display: grid;
     place-items: center;
     grid-template-columns: 1fr 1fr;
     height: 80vh;
 
-    .register-form-container{
+    .register-form-container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,7 +17,8 @@
         min-width: 500px;
         color: $secondary-color;
         border-radius: 10px;
-        form{
+
+        form {
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -25,7 +26,7 @@
             max-width: 400px;
             margin: 0 auto;
 
-            input{
+            input {
                 padding: 0.5rem;
                 border: 1px solid black;
                 border-radius: 4px;
@@ -33,7 +34,7 @@
                 background-color: $secondary-color;
             }
 
-            button{
+            button {
                 padding: 0.5rem;
                 background-color: $primary-color;
                 color: white;
@@ -42,19 +43,48 @@
                 cursor: pointer;
                 transition: 0.2s ease-in-out;
 
-                &:hover{
+                &:hover {
                     background-color: darken(black, 10%);
                 }
             }
         }
     }
-    .register-image-container{
+
+    .register-image-container {
         height: 100%;
         width: 100%;
-        img{
+
+        img {
             height: auto;
             width: 600px;
             object-fit: cover;
+        }
+    }
+}
+
+@media (max-width: 990px) {
+    .register-section {
+        padding-top: 6vh;
+        grid-template-columns: 1fr;
+        height: auto;
+
+        .register-form-container {
+            width: 90%;
+            min-width: unset;
+            height: auto;
+            padding: 20px;
+        }
+
+        .register-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+
+            img {
+                width: 40%;
+                height: 100%;
+            }
         }
     }
 }

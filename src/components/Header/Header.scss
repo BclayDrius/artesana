@@ -8,6 +8,9 @@ header {
     left: 0;
     z-index: 9999; // Bootstrap navbar z-index
 
+
+
+
     .navbar-toggler {
         color: $primary-color !important;
         border-color: $primary-color !important;
@@ -122,5 +125,12 @@ header {
         background-color: $primary-color;
         margin: 0 auto;
         border: none;
+    }
+}
+
+@media (max-width: 468px) {
+    .custom-navbar-container {
+        margin: 0px;
+        padding: 20px !important;
     }
 }
