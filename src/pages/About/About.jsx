@@ -149,19 +149,7 @@ const About = () => {
               </div>
               <div className="pickup-info">
                 <div className="pickup-description fade-in delay-1">
-                  <h3>¿Dónde encontrarnos?</h3>
-                  <p>
-                    Nuestro punto de recojo principal está ubicado en San
-                    Bartolo, un lugar lleno de historia y cultura. El entorno es
-                    perfecto para disfrutar de un agradable paseo mientras
-                    esperas tu pedido. Cerca puedes encontrar hermosas vistas al
-                    mar y una gran variedad de restaurantes tradicionales.
-                  </p>
-                  <p>
-                    Nuestro horario de recojo es de lunes a sábado, de 9:00 a.m.
-                    a 6:00 p.m. Siempre puedes contactarnos para coordinar tu
-                    recojo con antelación.
-                  </p>
+                 
                 </div>
                 <div className="pickup-map fade-in delay-2">
                   <iframe

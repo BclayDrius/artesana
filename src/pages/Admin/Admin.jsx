@@ -3,16 +3,8 @@ import "./Admin.scss";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
-const categorias = [
-  "Café",
-  "Endulzantes",
-  "Salados",
-  "Bebidas",
-  "Pan o Wrap",
-  "Hamburguesas",
-  "Al Plato",
-  "Desayunos",
-];
+const categorias = ["Cafés", "Panes", "Quesos", "Helados"];
+
 
 function Admin() {
   const [productos, setProductos] = useState([]);
