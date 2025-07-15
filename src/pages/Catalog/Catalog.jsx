@@ -48,30 +48,12 @@ function Catalog() {
           url += `?categoria=${encodeURIComponent(selectedCategory)}`;
         }
         const response = await axios.get(url);
-        // --- Producto de ejemplo ---
-        const demoProduct = {
-          id: "demo-1",
-          nombre: "Producto de Ejemplo",
-          descripcion: "Este es un producto de ejemplo para pruebas.",
-          precio: 9.99,
-          imagen: "", // Puedes poner una URL de imagen si quieres
-        };
-        setProducts([demoProduct, ...response.data]);
+        setProducts(response.data);
       } catch (error) {
         console.error(
           "❌ Error al cargar productos:",
           error.response?.data || error.message
         );
-        // Si hay error, igual muestra el producto de ejemplo
-        setProducts([
-          {
-            id: "demo-1",
-            nombre: "Producto de Ejemplo",
-            descripcion: "Este es un producto de ejemplo para pruebas.",
-            precio: 9.99,
-            imagen: "",
-          },
-        ]);
       } finally {
         setLoading(false);
       }
